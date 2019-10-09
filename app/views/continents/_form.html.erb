@@ -1,0 +1,40 @@
+<%#= form_with(model: continent, local: true) do |form| #%>
+  <%# if continent.errors.any? #%>
+    <!-- <div id="error_explanation">
+      <h2><%#= pluralize(continent.errors.count, "error") #%> prohibited this continent from being saved:</h2>
+
+      <ul>
+      <%# continent.errors.full_messages.each do |message| #%>
+        <li><%#= message #%></li>
+        <%# end #%>
+      </ul>
+    </div> -->
+  <%# end #%>
+  
+
+  <%= form_for(@continent) do |continent|%>
+    <%= continent.label :name %>
+    <%= continent.text_field :name %>
+    
+    <h2>Countries:</h2>
+    <%= continent.fields_for :countries do |country| %>
+      <%= country.label :name %>
+      <%= country.text_field :name %>
+      <%= country.label :population %>
+      <%= country.number_field :population %>
+      
+      <h3>Cities:</h3>
+      <%= country.fields_for :cities do |city| %>
+        <%= city.label :name %>
+        <%= city.text_field :name %>
+        <%= city.label :population %>
+        <%= city.number_field :population %>
+        <%= city.label :industry %>
+        <%= city.text_field :industry %>
+        <% end %>
+
+    <% end %>
+    
+    <br><br>
+    <%= continent.submit "Your Country Can Exist Too" %>
+  <% end %>
